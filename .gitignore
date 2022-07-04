@@ -1,0 +1,8 @@
+  
+target/
+**/static/
+
+.vscode
+.idea
+*.iml
+build/
