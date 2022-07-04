@@ -42,7 +42,7 @@ public class AtmServiceImpl implements IAtmService{
         try {
             int[] bankAmounts = atmServiceHelper.getBankAmount();
             int[] bankValues = atmServiceHelper.getBankValues();
-            logger.info("pin: "+pin);
+            
             Optional<BankAccount> dbAccount = bankAccountRepository.findById(pin);
             if(!dbAccount.isPresent()) {
                   throw new InvalidPinException("Pin is Incorrect!");
