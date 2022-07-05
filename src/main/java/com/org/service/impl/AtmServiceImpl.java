@@ -39,10 +39,22 @@ public class AtmServiceImpl implements IAtmService{
         String responseDesc;
         String responseStatus;
         ResponseWrapper responseWrapper = new ResponseWrapper();
+        HashMap<Integer, Integer> atmCash = new HashMap<>();
+        
         try {
             int[] bankAmounts = atmServiceHelper.getBankAmount();
             int[] bankValues = atmServiceHelper.getBankValues();
             
+            for (int i = 0; i < bankValues.length; i++) {
+				atmCash.put(bankValues[i], bankAmounts[i]);
+			}
+			
+			bankValues = IntStream.of(bankValues).boxed().sorted(Comparator.reverseOrder()).mapToInt(i -> i).toArray();
+
+			for (int i = 0; i < bankValues.length; i++) {
+				int noOfNotes = atmCash.get(bankValues[i]);
+				bankAmounts[i] = noOfNotes;
+			}
             Optional<BankAccount> dbAccount = bankAccountRepository.findById(pin);
             if(!dbAccount.isPresent()) {
                   throw new InvalidPinException("Pin is Incorrect!");
