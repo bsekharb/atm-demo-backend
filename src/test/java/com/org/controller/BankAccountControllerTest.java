@@ -53,4 +53,19 @@ public class BankAccountControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[*].pin").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[*].pin").value(1234));
     }
+
+    @Test
+    public void testName() {
+        List<BankAccount> bankAccountList = new ArrayList<>();
+        BankAccount bankAccount = new BankAccount();
+        bankAccount.setPin(1234);
+        bankAccount.setAccountNumber(1234567);
+        bankAccount.setOverDraft(200);
+        bankAccount.setOpeningBalance(800);
+        bankAccountList.add(bankAccount);
+
+        
+    }
+
+
 }

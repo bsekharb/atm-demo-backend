@@ -11,6 +11,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -42,6 +44,16 @@ public class BankAccountServiceImplTest {
         Mockito.when(bankAccountRepository.findAll()).thenReturn(BankAccountList);
 
         List<BankAccount> returnedBankAccountList = bankAccountService.getAllBankAccount();
-        assertEquals(returnedBankAccountList.size(), BankAccountList.size());
+        bankAccountService.createBankAccount(bankAccount);
+        Mockito.when(bankAccountRepository.findById(bankAccount.getPin())).
+        thenReturn(Optional.of(new BankAccount()));
+        
+       int statusCode = bankAccountService.getAccountBalance(bankAccount.getPin()).getStatusCodeValue();
+      Mockito.when(bankAccountRepository.
+      findById(bankAccount.getPin())).thenReturn(Optional.of(new BankAccount()));
+      bankAccountService.getAccountById(bankAccount.getPin());
+     
+      assertEquals(statusCode,200);
+       assertEquals(returnedBankAccountList.size(), BankAccountList.size());
     }
 }
