@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.stream.IntStream;
 import java.util.List;
 import java.util.Optional;
 import com.org.entity.BankAccount;
@@ -39,10 +42,22 @@ public class AtmServiceImpl implements IAtmService{
         String responseDesc;
         String responseStatus;
         ResponseWrapper responseWrapper = new ResponseWrapper();
+        HashMap<Integer, Integer> atmCash = new HashMap<>();
+        
         try {
             int[] bankAmounts = atmServiceHelper.getBankAmount();
             int[] bankValues = atmServiceHelper.getBankValues();
-            logger.info("pin: "+pin);
+            
+            for (int i = 0; i < bankValues.length; i++) {
+				atmCash.put(bankValues[i], bankAmounts[i]);
+			}
+			
+			bankValues = IntStream.of(bankValues).boxed().sorted(Comparator.reverseOrder()).mapToInt(i -> i).toArray();
+
+			for (int i = 0; i < bankValues.length; i++) {
+				int noOfNotes = atmCash.get(bankValues[i]);
+				bankAmounts[i] = noOfNotes;
+			}
             Optional<BankAccount> dbAccount = bankAccountRepository.findById(pin);
             if(!dbAccount.isPresent()) {
                   throw new InvalidPinException("Pin is Incorrect!");

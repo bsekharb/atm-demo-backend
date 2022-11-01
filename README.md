@@ -17,7 +17,7 @@ The ATM Simulator provides two services.
 * junit,Mockito - Write beautiful tests with a clean & readable with simple API
 
 Git url:
-*https://github.com/bsekharb/atm-simulator-backend.git
+*https://github.com/bsekharb/atm-demo-backend.git
 * Maven - you can easily install it on MAC OS X by 
 ```
 $ brew install maven
@@ -26,8 +26,8 @@ $ brew install maven
 ### Running project on MAC OS X
 * Clone and go to the project by running command
 ```
-$ git clone git@github.com:bsekharb/atm-simulator-backend.git or git clone https://github.com/bsekharb/atm-simulator-backend.git 
-$ cd cd atm-simulator-backend
+$ git clone git@github.com:bsekharb/atm-demo-backend.git or git clone https://github.com/bsekharb/atm-demo-backend.git 
+$ cd cd atm-demo-backend
 ```
 
 * Then prepare project dependencies with

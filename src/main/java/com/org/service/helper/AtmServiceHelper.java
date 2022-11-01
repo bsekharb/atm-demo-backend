@@ -37,9 +37,7 @@ public class AtmServiceHelper {
         for (int i = 0; i < banks.size(); i++) {
             bankAmount[i] = banks.get(i).getAmount();
             bankValues[i] = banks.get(i).getValue();
-            logger.info("bankValues are --->raj: " + bankValues[i]);
-            logger.info("bankAmount are --->raj: " + bankAmount[i]);
-        }
+         }
         logger.info("Got data from database : {}", banks);
         return bankAmount;
     }
